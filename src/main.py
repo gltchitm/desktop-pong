@@ -5,7 +5,7 @@ from gi.repository import Gtk, Gdk
 
 from window_size import WindowSize
 from ball_window import BallWindow
-from paddle import Paddle
+from paddle_window import PaddleWindow
 from store import store
 
 import config
@@ -17,13 +17,13 @@ store.set_value("ball_position", (None, None))
 def init(window_size):
     width, height = window_size
 
-    left = Paddle(
+    left = PaddleWindow(
         window_size,
         config.PADDLE_PADDING,
         (height - config.PADDLE_SIZE[1]) / 2,
         True
     )
-    right = Paddle(
+    right = PaddleWindow(
         window_size,
         width - config.PADDLE_SIZE[0] - config.PADDLE_PADDING,
         (height - config.PADDLE_SIZE[1]) / 2,

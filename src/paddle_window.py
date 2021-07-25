@@ -5,7 +5,7 @@ from near import near
 
 import config
 
-class Paddle(Gtk.Window):
+class PaddleWindow(Gtk.Window):
     def __init__(self, window_size, x, y, is_ai):
         Gtk.Window.__init__(self)
 
@@ -46,7 +46,7 @@ class Paddle(Gtk.Window):
     def rebuild(self):
         if config.USE_ANTI_TAMPER:
             self.destroy()
-            self = Paddle(self.window_size, self.x, self.y, self.is_ai)
+            self = PaddleWindow(self.window_size, self.x, self.y, self.is_ai)
             self.show_all()
     def ball_position_change(self, new_position):
         self.target_y = new_position[1] - config.PADDLE_SIZE[1] / 2
