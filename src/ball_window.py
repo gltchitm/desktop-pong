@@ -88,12 +88,16 @@ class BallWindow(Gtk.Window):
             self.y < ai_y + config.PADDLE_SIZE[1] + config.BALL_PADDING
         ):
             self.x_velocity *= -1
+            if config.USE_BALL_STUCK_IN_PADDLE_FIX:
+                self.x = ai_x + (config.BALL_DIAMETER / 2 + config.BALL_PADDING)
         if (
             self.x > player_x - (config.BALL_DIAMETER + config.BALL_PADDING) and
             self.y + (config.BALL_DIAMETER + config.BALL_PADDING) > player_y and
             self.y < player_y + config.PADDLE_SIZE[1] + config.BALL_PADDING
         ):
             self.x_velocity *= -1
+            if config.USE_BALL_STUCK_IN_PADDLE_FIX:
+                self.x = player_x - (config.BALL_DIAMETER + config.BALL_PADDING)
 
         if not near(self.x, current_x, config.BALL_LEEWAY) or not near(self.y, current_y, config.BALL_LEEWAY):
             self.rebuild(True)
