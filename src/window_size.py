@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk
 
 class WindowSize(Gtk.Window):
     def __init__(self):

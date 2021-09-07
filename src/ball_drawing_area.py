@@ -1,8 +1,7 @@
-from gi.repository import Gtk, Gdk
-import cairo
+from gi.repository import Gtk
 
 from config import BALL_DIAMETER, BALL_COLOR
-from math import pi, tau
+from math import tau
 
 class BallDrawingArea(Gtk.DrawingArea):
     def __init__(self, window):
