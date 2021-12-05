@@ -8,10 +8,10 @@ After starting DesktopPong, you can move your paddle (red) by clicking and dragg
 You can change the configuration values in `src/config.py`.
 
 ## Anti-Tamper
-The anti-tamper system prevents tampering with the windows. However, it can cause lag and flashing (especially if the configuration values not fitting). You can disable it completely by setting `USE_ANTI_TAMPER` to `False` in `src/config.py`.
+The anti-tamper system prevents tampering with the windows. However, it can cause lag and flashing (especially if the configured improperly). You can disable it completely by setting `USE_ANTI_TAMPER` to `False` in `src/config.py`.
 
 ## Compatibility
-Tested on Cinnamon 4.8 and 5.0 (with the panel at the bottom). There is a very good chance DesktopPong will not work on any other desktop environments.
+Tested on Cinnamon 4.8 and 5.0 (with the panel at the bottom). There is a very good chance DesktopPong will not work anywhere else.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](LICENSE)

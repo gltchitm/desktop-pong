@@ -1,6 +1,6 @@
 import gi
 
-gi.require_version("Gtk", "3.0")
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from window_size import WindowSize
@@ -10,9 +10,9 @@ from store import store
 
 import config
 
-store.set_value("ai_paddle", (None, None))
-store.set_value("player_paddle", (None, None))
-store.set_value("ball_position", (None, None))
+store['ai_paddle'] = (None, None)
+store['player_paddle'] = (None, None)
+store['ball_position'] = (None, None)
 
 def init(window_size):
     width, height = window_size
@@ -36,10 +36,11 @@ def init(window_size):
     right.show_all()
     ball_window.show_all()
 
-def window_size_map_callback(window, event):
-    window.add_tick_callback(lambda window, frame_clock: window.destroy())
+def window_size_map_callback(window, _event):
+    window.add_tick_callback(lambda window, _frame_clock: window.destroy())
     init(window.get_size())
+
 window_size = WindowSize()
-window_size.connect("map-event", window_size_map_callback)
+window_size.connect('map-event', window_size_map_callback)
 
 Gtk.main()

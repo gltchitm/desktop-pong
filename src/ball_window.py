@@ -11,6 +11,7 @@ import config
 
 def rand_velocity():
     return config.BALL_VELOCITY if getrandbits(1) else -config.BALL_VELOCITY
+
 class BallWindow(Gtk.Window):
     def __init__(self, window_size, x=None, y=None, x_velocity=None, y_velocity=None):
         Gtk.Window.__init__(self)
@@ -41,10 +42,10 @@ class BallWindow(Gtk.Window):
 
         if self.x and self.y:
             self.move(self.x, self.y)
-        
-        self.connect("realize", self.realize)
-        self.connect("draw", self.draw)
-        self.connect("window-state-event", self.check_minimized)
+
+        self.connect('realize', self.realize)
+        self.connect('draw', self.draw)
+        self.connect('window-state-event', self.check_minimized)
     def rebuild(self, use_current_position):
         if not self.rebuilding:
             if config.USE_ANTI_TAMPER or not use_current_position:
@@ -55,14 +56,14 @@ class BallWindow(Gtk.Window):
                 else:
                     self = BallWindow(self.window_size)
                 self.show_all()
-    def tick(self, widget, frame_clock):
+    def tick(self, _widget, _frame_clock):
         if config.USE_ANTI_TAMPER:
             self.set_keep_above(True)
             self.get_window().move_to_desktop(0)
 
         current_x, current_y = self.get_position()
-        ai_x, ai_y = store.get_value("ai_paddle")
-        player_x, player_y = store.get_value("player_paddle")
+        ai_x, ai_y = store['ai_paddle']
+        player_x, player_y = store['player_paddle']
         width, height = self.window_size
 
         if ai_x == None or player_x == None:
@@ -107,13 +108,13 @@ class BallWindow(Gtk.Window):
 
         self.move(self.x, self.y)
 
-        store.set_value("ball_position", (self.x, self.y, self.x_velocity, self.y_velocity))
+        store['ball_position'] = (self.x, self.y, self.x_velocity, self.y_velocity)
 
         return True
-    def check_minimized(self, widget, event):
+    def check_minimized(self, _widget, event):
         if event.new_window_state & Gdk.WindowState.ICONIFIED:
             self.rebuild(True)
-    def realize(self, widget):
+    def realize(self, _widget):
         current_x, current_y = self.get_position()
         self.x = current_x
         self.y = current_y
@@ -122,9 +123,9 @@ class BallWindow(Gtk.Window):
         self.add(ball)
         ball.show_all()
 
-        cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), "not-allowed")
+        cursor = Gdk.Cursor.new_from_name(Gdk.Display.get_default(), 'not-allowed')
         self.get_window().set_cursor(cursor)
-    def draw(self, widget, cr):
+    def draw(self, _widget, cr):
         cr.set_source_rgba(1.0, 1.0, 1.0, 0.0)
         cr.set_operator(cairo.OPERATOR_SOURCE)
         cr.paint()
