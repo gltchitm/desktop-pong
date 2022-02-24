@@ -10,7 +10,6 @@ class PaddleWindow(Gtk.Window):
         Gtk.Window.__init__(self)
 
         self.window_size = window_size
-
         self.is_ai = is_ai
 
         color = Gdk.RGBA(*config.PADDLE_AI_COLOR) if is_ai else Gdk.RGBA(*config.PADDLE_PLAYER_COLOR)
@@ -29,6 +28,7 @@ class PaddleWindow(Gtk.Window):
         self.set_skip_taskbar_hint(True)
         self.set_skip_pager_hint(True)
         self.set_deletable(False)
+        self.set_resizable(False)
 
         self.dragging_from = None
         self.target_y = None
