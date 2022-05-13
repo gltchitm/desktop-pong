@@ -20,6 +20,8 @@ class PaddleWindow(Gtk.Window):
 
         self.move(x, y)
         self.resize(*config.PADDLE_SIZE)
+        self.set_default_size(*config.PADDLE_SIZE)
+        self.set_size_request(*config.PADDLE_SIZE)
 
         self.set_app_paintable(False)
         self.set_decorated(False)
