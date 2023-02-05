@@ -36,11 +36,16 @@ def init(window_size):
     right.show_all()
     ball_window.show_all()
 
-def window_size_map_callback(window, _event):
-    window.add_tick_callback(lambda window, _frame_clock: window.destroy())
+def window_draw_callback(window, event):
+    window_size = window.get_size()
+
+    if window_size == (1, 1):
+        return
+
+    window.add_tick_callback(lambda window, frame_clock: window.destroy())
     init(window.get_size())
 
 window_size = WindowSize()
-window_size.connect('map-event', window_size_map_callback)
+window_size.connect('draw', window_draw_callback)
 
 Gtk.main()
