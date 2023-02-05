@@ -13,10 +13,11 @@ def rand_velocity():
     return config.BALL_VELOCITY if getrandbits(1) else -config.BALL_VELOCITY
 
 class BallWindow(Gtk.Window):
-    def __init__(self, window_size, x=None, y=None, x_velocity=None, y_velocity=None):
+    def __init__(self, window_size, window_position, x=None, y=None, x_velocity=None, y_velocity=None):
         Gtk.Window.__init__(self)
 
         self.window_size = window_size
+        self.window_position = window_position
 
         self.x = x
         self.y = y
@@ -52,9 +53,10 @@ class BallWindow(Gtk.Window):
                 self.rebuilding = True
                 self.destroy()
                 if use_current_position:
-                    self = BallWindow(self.window_size, self.x, self.y, self.x_velocity, self.y_velocity)
+                    self = BallWindow(self.window_size, self.window_position, self.x, self.y,
+                        self.x_velocity, self.y_velocity)
                 else:
-                    self = BallWindow(self.window_size)
+                    self = BallWindow(self.window_size, self.window_position)
                 self.show_all()
     def tick(self, _widget, _frame_clock):
         if config.USE_ANTI_TAMPER:
@@ -71,7 +73,7 @@ class BallWindow(Gtk.Window):
 
         if (
             current_x < config.SCREEN_PADDING or
-            current_x + config.BALL_DIAMETER > width - config.SCREEN_PADDING
+            current_x + config.BALL_DIAMETER > width - config.SCREEN_PADDING + self.window_position[0]
         ):
             self.x -= self.x_velocity
             self.rebuild(False)

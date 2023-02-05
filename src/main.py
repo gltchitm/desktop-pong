@@ -14,23 +14,23 @@ store['ai_paddle'] = (None, None)
 store['player_paddle'] = (None, None)
 store['ball_position'] = (None, None)
 
-def init(window_size):
+def init(window_size, window_position):
     width, height = window_size
 
     left = PaddleWindow(
         window_size,
-        config.PADDLE_PADDING,
+        config.PADDLE_PADDING + window_position[0],
         (height - config.PADDLE_SIZE[1]) / 2,
         True
     )
     right = PaddleWindow(
         window_size,
-        width - config.PADDLE_SIZE[0] - config.PADDLE_PADDING,
+        width - config.PADDLE_SIZE[0] - config.PADDLE_PADDING + window_position[0],
         (height - config.PADDLE_SIZE[1]) / 2,
         False
     )
 
-    ball_window = BallWindow(window_size)
+    ball_window = BallWindow(window_size, window_position)
 
     left.show_all()
     right.show_all()
@@ -43,7 +43,7 @@ def window_draw_callback(window, event):
         return
 
     window.add_tick_callback(lambda window, frame_clock: window.destroy())
-    init(window.get_size())
+    init(window_size, window.get_position())
 
 window_size = WindowSize()
 window_size.connect('draw', window_draw_callback)
